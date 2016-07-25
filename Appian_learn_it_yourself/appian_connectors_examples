@@ -1,0 +1,81 @@
+load(
+
+	local!pagingInfo: a!pagingInfo(startIndex: 1, batchSize: -1),
+	
+	with(
+
+		local!responseBody:  a!fromJson(
+			jsonText: a!httpQuery(
+				url: "https://query.yahooapis.com/v1/public/yql", 
+				queryParameters: {
+					a!httpQueryParameter(name: "q", value: " select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='Pune, IN') "),
+					a!httpQueryParameter(name: "format", value: "json")
+				}
+			).result.body
+		),
+
+		local!forecast: todatasubset(local!responseBody.query.results.channel.item.forecast, local!pagingInfo),
+
+		a!dashboardLayout(
+
+			firstColumnContents: {
+			
+				a!gridField(
+					label: "",
+					value: local!pagingInfo,
+					saveInto: local!pagingInfo,
+					columns: {
+					
+						a!gridTextColumn(
+							label: "Date",
+							field: "text",
+							alignment: "RIGHT",
+							data: local!forecast.data.date
+						),
+						a!gridTextColumn(
+							label: "High",
+							field: "text",
+							alignment: "RIGHT",
+							data: local!forecast.data.high
+						),
+						
+						a!gridTextColumn(
+							label: "Low",
+							field: "text",
+							alignment: "RIGHT",
+							data: local!forecast.data.low
+						),
+						
+						a!gridTextColumn(
+							label: "Condition",
+							field: "text",
+							alignment: "RIGHT",
+							data: local!forecast.data.text
+						)
+					},
+					
+					totalCount: local!forecast.totalCount
+				),
+				
+				with(
+					
+					local!attributionImage: local!responseBody.query.results.channel.image,
+					a!imageField(
+						labelPosition: "COLLAPSED",
+						images: {
+							
+							a!webImage(
+								source: local!attributionImage.url,
+								link: a!safeLink(label: local!attributionImage.title, uri: local!attributionImage.link)
+							)
+						}
+					
+					)
+				
+				)
+			}
+		)
+	)
+
+)
+

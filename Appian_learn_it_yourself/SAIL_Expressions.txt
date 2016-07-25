@@ -1,0 +1,39 @@
+Checkbox field:
+
+
+=a!checkboxField(
+  label: "Language",
+  instructions: "In which languages are you proficient?",
+  choiceLabels: {
+    "English",
+    "Spanish",
+    "French",
+    "German"
+  },
+  choiceValues: {
+    "en_US",
+    "es_ES",
+    "fr_FR",
+    "de_DE"
+  },
+  value: { "en_US", "fr_FR" }
+)
+
+________________________________________________________________________________________________
+
+Image Field
+
+=a!imageField(
+  label: "ImageField Example",
+  images: {
+    a!webImage(
+      source: "http://i.imgur.com/4tf4Cmo.png"
+    ),
+    a!webImage(
+      source: "http://i.imgur.com/WiTQBf5.png"
+    ),
+    a!webImage(
+      source: "http://i.imgur.com/M9TEmAS.png"
+    )
+  }
+)

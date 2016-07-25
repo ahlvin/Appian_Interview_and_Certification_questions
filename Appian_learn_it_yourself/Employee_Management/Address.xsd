@@ -1,0 +1,77 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/suite/types/" targetNamespace="http://localhost:8080/suite/types/">
+  <xsd:complexType name="Address">
+  
+		<xsd:annotation>
+		  <xsd:appinfo source="appian.jpa">
+				 @Table(name="EMP_ADDRESS")
+			</xsd:appinfo>
+		  <xsd:documentation><![CDATA[All the addresses of the employees reside in this CDT]]></xsd:documentation>
+		</xsd:annotation>
+    <xsd:sequence>
+	
+      <xsd:element name="id" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		     @Id
+			 @GeneratedValue
+			 @Column(name="ID", columnDefinition="int")
+		  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+
+
+      <xsd:element name="empid" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @Column(name="EMPID", columnDefinition="int")
+		  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+      <xsd:element name="house_number" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @Column(name="HOUSENO", columnDefinition="int")
+		  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+	  
+      <xsd:element name="steetname" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @Column(name="STREETNAME", columnDefinition="varchar(500)")
+		  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+	  
+      <xsd:element name="locality" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+			@Column(name="LOCALITY", columnDefinition="varchar(500)")
+		</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+	  
+      <xsd:element name="pincode" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @Column(name="PINCODE", columnDefinition="varchar(500)")
+		  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+      <xsd:element name="city" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @Column(name="CITY", columnDefinition="varchar(500)")
+		  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>	  
+	  
+    </xsd:sequence>
+	
+  </xsd:complexType>
+</xsd:schema>

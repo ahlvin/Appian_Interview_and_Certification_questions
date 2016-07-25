@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<definitions name="Names_webservice" targetNamespace="http://appiancorp.com/webservices/pm" xmlns:tns="http://appiancorp.com/webservices/pm" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://appiancorp.com/webservices/pm/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <schema targetNamespace="http://appiancorp.com/webservices/pm/types" 
+            xmlns:tns="http://appiancorp.com/webservices/pm/types" 
+            xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+            xmlns="http://www.w3.org/2001/XMLSchema">
+
+      <simpleType name="Community">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="CommunityArray">
+        <sequence>
+          <element name="value" type="tns:Community" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="DiscussionThread">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="DiscussionThreadArray">
+        <sequence>
+          <element name="value" type="tns:DiscussionThread" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Document">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="DocumentArray">
+        <sequence>
+          <element name="value" type="tns:Document" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Folder">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="FolderArray">
+        <sequence>
+          <element name="value" type="tns:Folder" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Forum">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="ForumArray">
+        <sequence>
+          <element name="value" type="tns:Forum" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Group">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="GroupArray">
+        <sequence>
+          <element name="value" type="tns:Group" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="KnowledgeCenter">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="KnowledgeCenterArray">
+        <sequence>
+          <element name="value" type="tns:KnowledgeCenter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Message">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="MessageArray">
+        <sequence>
+          <element name="value" type="tns:Message" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Page">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="PageArray">
+        <sequence>
+          <element name="value" type="tns:Page" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="Portlet">
+        <restriction base="long" />
+      </simpleType>
+      <complexType name="PortletArray">
+        <sequence>
+          <element name="value" type="tns:Portlet" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <simpleType name="User">
+        <restriction base="string" />
+      </simpleType>
+      <complexType name="UserArray">
+        <sequence>
+          <element name="value" type="tns:User" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+      <simpleType name="EmailAddress">
+        <restriction base="string" />
+      </simpleType>
+      <complexType name="EmailAddressArray">
+        <sequence>
+          <element name="value" type="tns:EmailAddress" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+      <complexType name="People">
+        <sequence>
+          <element name="type" type="string" />
+          <element name="id" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PeopleArray">
+        <sequence>
+          <element name="value" type="tns:People" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <complexType name="EmailRecipient">
+        <sequence>
+          <element name="type" type="string" />
+          <element name="id" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="EmailRecipientArray">
+        <sequence>
+          <element name="value" type="tns:EmailRecipient" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <complexType name="Content">
+        <sequence>
+          <element name="type" type="string" />
+          <element name="id" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="ContentArray">
+        <sequence>
+          <element name="value" type="tns:Content" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <complexType name="LongArray">
+        <sequence>
+          <element name="value" type="long" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+      <complexType name="DoubleArray">
+        <sequence>
+          <element name="value" type="double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <complexType name="StringArray">
+        <sequence>
+          <element name="value" type="string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+      <complexType name="DateArray">
+        <sequence>
+          <element name="value" type="date" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+      <complexType name="TimeArray">
+        <sequence>
+          <element name="value" type="time" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+      <complexType name="DateTimeArray">
+        <sequence>
+          <element name="value" type="dateTime" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+      
+      <complexType name="BooleanArray">
+        <sequence>
+          <element name="value" type="boolean" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
+
+    </schema>
+  </types>
+
+  <message name="startRequest">
+    <part name="username" type="xsd:string"/>
+    <part name="password" type="xsd:string"/>
+    
+      <part name="arrtxt_names" type="ns2:StringArray"/>
+    
+  </message>
+  <message name="startResponse">
+    <part name="processId" type="xsd:long"/>
+  </message>
+
+  <portType name="StartProcessIF">
+    
+      
+      
+    <operation name="start" parameterOrder="username password arrtxt_names">
+      
+    
+      <documentation>Starts the process.</documentation>
+      <input message="tns:startRequest"/>
+      <output message="tns:startResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="StartProcessIFBinding" type="tns:StartProcessIF">
+
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+
+    <operation name="start">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" namespace="http://appiancorp.com/webservices/pm"/></input>
+      <output>
+        <soap:body use="literal" namespace="http://appiancorp.com/webservices/pm"/></output>
+    </operation>
+
+  </binding>
+
+  <service name="Names_webservice">
+    <port name="StartProcessIFPort" binding="tns:StartProcessIFBinding">
+      <soap:address location="http://BHD10060:8080/suite/webservice/processmodel/Names_webservice"/>
+    </port>
+  </service>
+
+</definitions>

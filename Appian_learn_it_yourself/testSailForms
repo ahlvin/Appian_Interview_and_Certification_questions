@@ -1,0 +1,115 @@
+a!sectionLayout(
+     
+      label: "Meeting Details",
+      firstColumnContents: {
+        a!textField(
+          label: "Subject",
+          instructions: "Enter a short Subject for this meeting",
+          required: true,
+          requiredMessage: "A subject for the Meeting is required",
+          labelPosition: "ADJACENT"
+        ),
+        
+        a!paragraphField(
+          label: "Description",
+          instructions: "Enter a short description for the Meeting",
+          required: true,
+          requiredMessage: "A short description for the meeting is necessary",
+          labelPosition: "ADJACENT"
+        ),
+        
+        a!dateTimeField(
+          label: "Start DateTime",
+          readOnly: true,
+          value: now(),
+          labelPosition: "ADJACENT"
+        ),
+        a!textField(
+          label: "Location",
+          instructions: "Please enter a location for this meeting",
+          required: true,
+          reuiredMessage: "A Location for the meeting is needed",
+          labelPosition: "ADJACENT"
+        ),
+        a!integerField(
+          label: "Duration",
+          instructions: "Enter the duration for the meeting in minutes",
+          required: true,
+          requiredMessage: "Please enter the duration for the meeting",
+          labelPosition: "ADJACENT"
+        ),
+        a!pickerFieldUsers(
+          label: "Attendees",
+          instructions: "Please select the meeting Attendees",
+          required: true,
+          labelPosition: "ADJACENT",
+          requiredMessage: "Atleast one Meeting attendee is required"
+        ),
+
+     
+
+        load(
+           local!myvar:"",
+           {
+           
+           a!radioButtonField(
+             
+             label: "Send Reminders",
+             labelPosition: "ADJACENT",
+             required: true,
+             choiceLabels: {
+               "Yes",
+               "No"
+             },
+             choiceValues: {
+               true(),
+               false()
+             },
+             
+             saveInto: local!myvar
+           ),
+   
+            
+            if(local!myvar=false(), 
+
+               {}, {a!dateTimeField(label: "When to Send Reminders",labelPosition: "ADJACENT",required:true),
+               
+               a!radioButtonField(label: "Review/Edit Reminders Before Sending", labelPosition:"ADJACENT",required:true,choiceLabels:{"Yes","No"},choiceValues:{true(),false()})
+               }
+
+               
+            )
+           }
+          ),
+          
+          a!radioButtonField(
+            label:"Send Email Messages",
+            required: "true",
+            choiceLabels: {
+              "Yes",
+              "No"
+            },
+            choiceValues: {
+              true(),
+              false()
+            },
+            labelPosition: "ADJACENT"
+          ),
+          
+          a!buttonLayout(
+            
+            primaryButtons: {
+              a!buttonWidget(
+                label: "Create Meeting",
+                style: "PRIMARY",
+                submit: true,
+                validate: true
+              )
+            }
+          )
+        }
+        )
+        
+
+      
+   

@@ -1,0 +1,36 @@
+load(
+  
+  local!pagingInfo: a!pagingInfo(
+    startIndex: 1,
+    batchSize: 20,
+    sort: a!sortInfo(
+      field: "minutes",
+      ascending: true
+    )
+  ),
+  
+  local!datasubset:  queryrecord(
+    cons!MMS_RECORD_TYPE,
+    
+    a!query(
+      selection: a!querySelection(
+        columns: {
+          a!queryColumn(field: "int_durationInMinutes", alias: "minutes")
+        }
+      ),
+      pagingInfo: local!pagingInfo
+    )
+  ),
+  
+ a!barChartField(
+   
+   label: "Simple bar chart",
+   series: {
+       a!chartSeries(label: "minutes", data: index(local!datasubset.data, "minutes", null)),
+   },
+   yAxisTitle: "Duration In Minutes",
+   xAxisTitle: "Meetings"
+ )
+   
+)
+

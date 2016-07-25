@@ -1,0 +1,52 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/suite/types/" targetNamespace="http://localhost:8080/suite/types/">
+
+   <xsd:complexType name="MMS_UserCheckin_Data">
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+				 @Table(name="MMS_CheckIn_Details")
+			</xsd:appinfo> 
+		   <xsd:documentation>All the user checkin details</xsd:documentation>
+		</xsd:annotation>
+			
+		 <xsd:sequence>
+		 
+		   	<xsd:element name="int_ID" type="xsd:unsignedInt">
+				<xsd:annotation>
+					<xsd:appinfo source="appian.jpa">
+						@Id
+						@GeneratedValue
+						@Column(name="ID",columnDefinition="bigint")
+					</xsd:appinfo>
+				</xsd:annotation>
+            </xsd:element>
+			
+			<xsd:element name="checkindata_meetingId" nillable="true" type="xsd:unsignedInt">
+				<xsd:annotation>
+					<xsd:appinfo source="appian.jpa">
+					  @Column(name="MEETING_ID",columnDefinition="bigint")
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element> 
+
+            <xsd:element name="txt_userName" type="xsd:string">
+                <xsd:annotation>
+                   <xsd:appinfo source="appian.jpa">
+                       @Column(name="USERNAME",columnDefinition="varchar(500)")
+                   </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+
+            <xsd:element name="dtm_dateTimeWhenCheckedIn" type="xsd:dateTime">
+                <xsd:annotation>
+                   <xsd:appinfo source="appian.jpa">
+                       @Column(name="DTM_DATETIMECHECKEDIN",columnDefinition="datetime")
+                   </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+
+
+		 </xsd:sequence>
+
+    </xsd:complexType>
+	
+</xsd:schema>

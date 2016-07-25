@@ -1,0 +1,47 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/suite/types/" targetNamespace="http://localhost:8080/suite/types/">
+  <xsd:complexType name="MMS_Process_MetaData">
+
+    <xsd:annotation>
+	    <xsd:appinfo source="appian.jpa">
+            @Table(name="MMS_Process_MetaData")
+        </xsd:appinfo> 
+      <xsd:documentation>a custom data type for process related metadata in MMS</xsd:documentation>
+    </xsd:annotation>
+
+
+    <xsd:sequence>
+	
+	   <xsd:element name="id" type="xsd:int">
+            <xsd:annotation>
+                <xsd:appinfo source="appian.jpa">
+                    @Id
+                    @GeneratedValue
+					@Column(name="ID")
+                </xsd:appinfo>
+            </xsd:annotation>
+       </xsd:element>
+	   
+		<xsd:element name="meetingId" nillable="true" type="xsd:int">
+			<xsd:annotation>
+				<xsd:appinfo source="appian.jpa">
+				  @Column(name="MEETING_ID")
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:element> 
+		
+		
+		<xsd:element name="checkInAndReviewppId" nillable="true" type="xsd:int">
+			<xsd:annotation>
+				<xsd:appinfo source="appian.jpa">
+				  @Column(name="CHECKINANDREVIEWPPID")
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:element>
+
+    </xsd:sequence>
+
+
+  </xsd:complexType>
+
+
+</xsd:schema>

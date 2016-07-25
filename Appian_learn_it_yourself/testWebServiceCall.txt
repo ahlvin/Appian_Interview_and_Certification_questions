@@ -1,0 +1,12 @@
+= webservicequery(
+  
+  a!wsConfig(
+    wsdlUrl: "http://bhd10060:8080/suite/webservice/processmodel/Names_webservice?WSDL",
+    service: "{http://appiancorp.com/webservices/pm}Names_webservice",
+    port: "StartProcessIFPort",
+    operation: "{http://appiancorp.com/webservices/pm}start"
+  ),
+  {
+    startRequest: {username: "chetan.yewale", password: "acer4720",  txt_name: "mrcool" }
+  }
+).returnValue.startResponse.return

@@ -1,0 +1,32 @@
+Appian is PaaS
+
+
+BPM and PLM
+Product Lifecycle Management and Business Process Management are not two different approaches; rather, they are complementary approaches. The main difference between them lies in the level of abstraction: The PLM approach can, for instance, help you define an accurate product change management process, while a BPM can help you precisely determine the common change implementation cycle time. With BPM you also have the possibility to deploy your process within a BPMS (business process management system) without having to make costly modifications to COTS products or develop an information system from scratch.
+
+
+
+BPM:
+
+Business Organizations use processes (also known as "work-flows") to get the work done for business purpose.
+Processes involve different activities (tasks) which need to be completed by people.
+These tasks often need collaboration among the people involved.
+
+There are many challenges in getting the work done:
+1. For a user to complete a task i.e for him to take some action, data is needed. The Data might be spread across different data sources or even in third party-systems.
+2. People need to collaborate on tasks frequently(even if it is a geographically diverse work-force) to get the work done.
+3. The processes maybe very prone to change due to changing requirements/business needs.
+4. The business demands that these processes be able to be adapted to new business requirements within short span of time.
+5. The management also wants to be able to view the process metrics - like how much has the process progressed, who worked on a particular task, what task is taking longer etc.  To summarize, managers need a lot of analytical data.
+6. Managers need a lot of analytical data because they are always looking for optimizing the process. Optimizing the process will in turn add value to the organization. The value delivered maybe in the form of reduced time, or reduced costs.  The efforts put in optimizing a process thus provide a "Return on Interest" which may substantially benefit the whole organization.
+
+
+
+
+Business rules can be written in expression rules.
+
+Knowledge management using communities and Knowledge centers.
+
+
+Security
+

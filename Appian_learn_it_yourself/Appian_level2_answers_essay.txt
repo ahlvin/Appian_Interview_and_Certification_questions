@@ -1,0 +1,23 @@
+Why is it important to assign tasks to groups or PVs instead of to individual users?
+
+1. In a business  workflow, usually tasks are assigned to individual departments rather than individual users.
+2. 
+
+
+
+
+
+2. Describe how you would explain the benefits of Appian to a customer who has no experience with BPM? In layman's terms, explain briefly what BPM is and how Appian software delivers value using BPM.
+
+
+
+3. What is a Tempo Record and a Tempo Report? How are they similar and how are they different?
+
+
+	
+4. What is Appian SAIL and what are the benefits and drawbacks to using SAIL?
+
+SAIl stands for 
+
+
+5. What is the difference between the with() and load() functions and when should you use each?

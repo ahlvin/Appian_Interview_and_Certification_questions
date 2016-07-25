@@ -1,0 +1,121 @@
+_____________________________________________________________________________________________
+
+rule!querySpecificEmployee
+
+=		  	  a!queryEntity(cons!EMPLOYEE_ENTITY,
+	 
+					a!query(
+					  
+					  selection: rule!employeeQuerySelection(),
+					  
+					  logicalExpression: a!queryLogicalExpression(
+					     
+						 operator: "AND",
+						 filters: {
+						    
+							a!queryFilter(
+							   
+							   field: "id",
+							   operator: "=",
+							   value: ri!employeeid
+							)
+						 }
+					  ),
+
+                     pagingInfo: ri!pagingInfo							  
+					)
+	 )
+	 
+_____________________________________________________________________________________________________
+
+rule!queryAllEmployees
+
+
+=		  	  a!queryEntity(cons!EMPLOYEE_ENTITY,
+					a!query(
+					  selection: rule!employeeQuerySelection(),
+                      pagingInfo: ri!pagingInfo							  
+					)
+	          )
+			  
+_________________________________________________________________________________________________
+
+
+  
+  
+_____________________________________________________________________________________________
+
+rule!queryEmployeesByLastName  
+  
+  =		  	  a!queryEntity(cons!EMPLOYEE_ENTITY,
+	 
+					a!query(
+					  
+					  selection: rule!employeeQuerySelection(),
+					  
+					  logicalExpression: a!queryLogicalExpression(
+					     
+						 operator: "AND",
+						 filters: {
+						    
+							a!queryFilter(
+							   
+							   field: "lastName",
+							   operator: "includes",
+							   value: ri!searchTerm
+							)
+						 }
+					  ),
+
+                     pagingInfo: ri!pagingInfo							  
+					)
+	 )
+
+
+_____________________________________________________________________________________________ 
+	 
+	 rule!returnEmployeeDataSubset
+
+= with(
+      local!pagingInfo: ri!query.pagingInfo,
+      local!queryCondition: index(ri!query, "logicalExpression|filter|search", null),
+      local!requestedId: if(
+         and(
+  		      index(local!queryCondition, "field", null) = "rp!id", 
+  		      index(local!queryCondition, "operator", null) = "="
+  		    ),
+  		    
+  		    index(local!queryCondition, "value", null),
+  		    null
+      ),
+	  
+	  local!department: if( 
+			
+			and( index(local!queryCondition, "field", null) = "department",  index(local!queryCondition, "operator", null) = "=" ),
+			
+			index(local!queryCondition, "value", null),
+			null
+	  ),
+	  
+	  local!searchTerm: index(local!queryCondition, "searchQuery", null) ,
+	  
+      local!datasubset:   if( not(isnull(local!requestedId)), 
+	  
+	                       rule!querySpecificEmployee(employeeid: local!requestedId, pagingInfo: local!pagingInfo),  
+						       
+							   if( not(isnull(local!searchTerm)),
+									rule!queryEmployeesByLastName(pagingInfo: local!pagingInfo, searchTerm: local!searchTerm),
+								
+							    if( not(isnull(local!department)),
+									
+									rule!getEmployeesByDepartment(local!department, local!pagingInfo),
+									
+									rule!queryAllEmployees(local!pagingInfo) 
+								)
+									
+							   )  
+						   
+						   ) ,
+	  
+      local!datasubset
+  )

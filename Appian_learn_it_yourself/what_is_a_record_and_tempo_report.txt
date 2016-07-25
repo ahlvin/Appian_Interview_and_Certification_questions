@@ -1,0 +1,212 @@
+load()
+
+Lets you define local variables within an expression for a SAIL interface and evaluate the expression with the new variables, then re-evaluate the function with the local variables' values from the previous evaluation.
+
+
+This function is used in expressions for SAIL interfaces to allow for user interaction on the SAIL, such as sorting or paging through a grid.
+
+
+
+with()
+
+Lets you define local variables within a function and evaluate the expression with the new variables.
+
+This function differs from the load() function because it recalculates the local variable values when the expression is re-evaluated.
+
+
+If an expression requires multiple evaluations of a complex value, you can use the with() function to define the value as a local variable, so it's only evaluated once.
+
+
+
+
+load()
+
+The load() function allows you to define one or more local variables, use the variables to evaluate the expression defined in its last parameter, and return the result. The load() function only initializes its local variables to their values when the SAIL interface is first rendered, such as when the user navigates to the Tempo report or refreshes the browser window.
+
+The fact that load() only initializes its local variables when the SAIL interface is first rendered has two key consequences: A SAIL component can save its value into a local variable defined by load(), and the value is persisted across reevaluations. External data can be queried once, stored in a local variable and reused upon every reevaluation.
+
+See also: load()
+
+with()
+
+The with() function is similar to load(), except that load() initializes its variables only when the SAIL interface first loads, whereas with() sets its variables every time the expression is reevaluated.
+
+The with() function is useful when you need to reuse the result of a function in multiple places in your expression and you need the expression to be calculated upon every reevaluation.
+
+NOTE: Do not save a component's value into a local variable defined by with(). The user's value and the variable's value are overwritten when the expression reevaluates.
+
+See also: with()
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+load(
+  
+  local!count: 12,
+  
+  local!lblarray:apply(fn!concat, merge(repeat(local!count, "Label ") ,  apply( fn!toString  ,1+enumerate(local!count)  ) ) ),
+  
+  local!valarray:  1 + enumerate(local!count),
+  
+  a!applyComponents(
+    a!textField(
+      label: _,
+      value: _
+    ),
+    
+    merge(
+      local!lblarray,
+      
+      local!valarray
+      
+    ),
+    
+    null
+  )
+
+)
+
+----------------------------------------------------------
+
+with(
+  
+  local!var1: ri!int_num,
+  
+  {
+      
+    a!integerField(
+      value: local!var1,
+      saveInto: a!save(ri!int_num, 2*save!value)
+    ) ,
+    
+    a!integerField(
+      value: local!var1,
+      saveInto: a!save(ri!int_num, save!value/2)
+    )
+  }
+
+)
+
+------------------------------------------------------------------------------
+
+load(
+  
+  local!var1: ri!int_num,
+  
+  {
+      
+    a!integerField(
+      value: local!var1,
+      saveInto: a!save(ri!int_num, 2*save!value)
+    ) ,
+    
+    a!integerField(
+      value: local!var1,
+      saveInto: a!save(ri!int_num, save!value/2)
+    )
+  }
+
+)
+
+
+
+
+load(								
+local!var1: val1,
+local!var2: val2,
+,
+….
+,
+local!varN:  valN,
+someExpression
+)
+
+/*none of the local variables are accessible here
+the result of evaluating the expression “someExpression” will be returned */
+
+
+--------------------------------------------------------------------------------------------
+/* */	
+with(
+  local!var1: ri!int_num,
+
+  { 
+  	a!integerField(
+  	  value: local!var1,
+  	  saveInto: a!save(ri!int_num, 2*save!value)
+  	) ,
+    
+    a!textField(
+      value: ri!int_num
+    )
+  }
+
+)
+
+----------------------------------------------------------------------------------------------------
+
+
+load(
+  local!var1: ri!int_num,
+
+  { 
+  	a!integerField(
+  	  value: local!var1,
+  	  saveInto: a!save(ri!int_num, 2*save!value)
+  	) ,
+    
+    a!textField(
+      value: ri!int_num
+    )
+  }
+
+)
+
+------------------------------------------------------------------------------------------------------------------
+
+with(
+
+local!filterVal: "abc",
+
+local!dataset: a!queryEntity(
+ entity: ... ,
+ 
+ query:  a!query(
+ 
+  ....,
+  
+  ....,
+  
+  filter: a!queryFilter(
+	
+	field: "columnName",
+	operator: "=",
+	value: local!filterVal
+  )
+ 
+ )
+
+
+),
+
+......,
+......
+
+
+)
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Why is it important to assign tasks to groups or PVs instead of to individual users?
+
+
+
+
+Appian recommends using groups for task assignment. Group assignments simplify the reassignment of existing responsibilities when personnel changes occur. Group assignments are retained when exporting and importing applications. 
+
+Tasks assigned to a user remain assigned to that user even after the user is deactivated. If the user is reactivated, the user will continue to see the task.
+
+The Process History tab does not record when a user accepts a group-assigned task.
+
+When a user accepts a group-assigned task, the other users in the group no longer see the task. If the user is removed from that group, the user no longer sees the task, and the other group members will see the task again with the option of accepting it.

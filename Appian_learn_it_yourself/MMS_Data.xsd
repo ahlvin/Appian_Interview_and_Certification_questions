@@ -1,0 +1,161 @@
+<xsd:schema targetNamespace="http://localhost:8080/suite/types/"
+  xmlns:tns="http://localhost:8080/suite/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="%7Bhttp%3A%2F%2Flocalhost%3A8080%2Fsuite%2Ftypes%2F%7DMMS_Feed_Data.xsd"/>
+  <xsd:include schemaLocation="%7Bhttp%3A%2F%2Flocalhost%3A8080%2Fsuite%2Ftypes%2F%7DMMS_Note.xsd"/>
+  <xsd:include schemaLocation="%7Bhttp%3A%2F%2Flocalhost%3A8080%2Fsuite%2Ftypes%2F%7DMMS_PostMeeting_Data.xsd"/>
+  <xsd:include schemaLocation="%7Bhttp%3A%2F%2Flocalhost%3A8080%2Fsuite%2Ftypes%2F%7DMMS_UserCheckin_Data.xsd"/>
+  <xsd:complexType name="MMS_Data">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+	         @Table(name="MMS_Meetings_Data")
+        </xsd:appinfo>
+      <xsd:documentation><![CDATA[All the MMS data resides in this CDT]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="int_MeetingID" nillable="true" type="xsd:unsignedInt">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+           @Id
+           @GeneratedValue
+           @Column(name="MEETING_ID",columnDefinition="bigint")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+	  <xsd:element name="dtm_meetingCreatedTime" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="MEETING_CREATED_TIME",columnDefinition="datetime")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+
+      <xsd:element name="txt_MeetingCreator" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+           @Column(name="MEETING_CREATOR",columnDefinition="varchar(500)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="txt_subject" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa"> 
+            @Column(name="SUBJECT",columnDefinition="varchar(500)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="txt_description" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="DESCRIPTION",columnDefinition="varchar(2000)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="dtm_meetingStartTime" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="MEETING_START_DATETIME",columnDefinition="datetime")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+
+      <xsd:element name="txt_location" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa"> 
+            @Column(name="LOCATION",columnDefinition="varchar(500)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="int_durationInMinutes" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="DURATION_IN_MINUTES",columnDefinition="int")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0"
+        name="arrtxt_Attendees" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="ATTENDEES_ARRAY",columnDefinition="varchar(500)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0"
+        name="arrtxt_whoCanViewMeeting" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="USERS_WHOCANVIEW",columnDefinition="varchar(500)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bool_sendReminders" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="BOOL_SEND_REMINDERS",columnDefinition="tinyint(1)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0"
+        name="arrdtm_dateTimesWhenRemindersShouldBeSent" nillable="true" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="ARRDTM_DATETIMES_WHEN_TO_SEND_REMINDERS",columnDefinition="datetime")
+           </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bool_reviewOrEditReminderBeforeSending"
+        nillable="true" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="SEND_OR_EDIT_REMINDER_BEFORE_SENDING",columnDefinition="tinyint(1)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  <xsd:element name="txt_postMeetingSummary" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @Column(name="POSTMEETING_SUMMARY",columnDefinition="varchar(2000)")
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" name="arrcdt_notes" type="tns:MMS_Note">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @OneToMany(cascade={CascadeType.REMOVE, CascadeType.REFRESH}, indexed=false)
+            @JoinColumn(name="MEETING_ID", nullable=false)
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0"
+        name="arrcdt_attendeesCheckInData" type="tns:MMS_UserCheckin_Data">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @OneToMany(cascade={CascadeType.REMOVE, CascadeType.REFRESH}, indexed=false)
+            @JoinColumn(name="MEETING_ID", nullable=false)
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+
+      <xsd:element maxOccurs="unbounded" minOccurs="0"
+        name="arrcdt_postMeetingAttendeeData" type="tns:MMS_PostMeeting_Data">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+            @OneToMany(cascade={CascadeType.REMOVE, CascadeType.REFRESH}, indexed=false)
+            @JoinColumn(name="MEETING_ID", nullable=false)
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0"
+        name="arrcdt_MeetingFeedData" type="tns:MMS_Feed_Data">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+				@OneToMany(cascade={CascadeType.REMOVE, CascadeType.REFRESH}, indexed=false)
+				@JoinColumn(name="MEETING_ID", nullable=false)
+			  </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

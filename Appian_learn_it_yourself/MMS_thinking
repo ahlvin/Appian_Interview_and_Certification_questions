@@ -1,0 +1,18 @@
+meeting starttime = 15 Aug 2014 9:00 AM
+
+
+a reminder can be set only after the current date time and before the meeting start time
+
+say remindersArray = 12 Aug 2014 5:00 PM,   14 Aug 2014 9:00 PM
+
+somebody edited the meeting data changed the reminders.
+
+suppose today is 11 Aug 2014 9:00 AM
+
+
+now remindersArray = 11 Aug 2014 10:00 AM, 12 Aug 2014 4:00 PM
+we need to cancel the reminders which are scheduled(on 12 Aug 2014 5:00 PM and 14 Aug 2014 9:00 PM). We cannot cancel the reminders which are already sent.
+
+we need to cancel the reminders immediately  after the new reminders are set.
+
+The new reminders should be immediately set.

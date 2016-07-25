@@ -1,0 +1,93 @@
+Prep for interviews:
+
+
+details about CDTs
+WebServices, RESTFul webservices consumption in SAIL.
+JSON data manipulation.
+
+o	Brief about your experience
+o	How was it implemented in your project, were you receiving requirements from architect and was that ADT or something like that design document how it was carried out?
+
+There was a requirements documentation and a rough design was created by the sales person in Analyst view.
+We designed the initial architecture
+
+o	So the FRD document was telling the higher level requirements or did it give detailed description of how it has to be implemented in your code?
+
+It was giving high level requirements.
+
+o	In appian you can do design also, in case you don't want to do development, it allows  many people to code at same time so have you come across any such scenario?
+
+
+o	So in case any requirement gets updated , you'll be updating the document or will you be directly updating the appian flow?
+
+
+o	Do you have any experience of creating process model ?
+Yes, I have developed individual process models..
+
+
+o	Have you worked on exposing the process model as web service or consuming any web service?
+
+o	Is there any smart service in appian with which we can consume the web service?
+Call Web Service Node. The function a!querywebservice() can also be used for calling SOAP based web services.
+for comsuimg RESTful webservices we need a!httprequest()
+
+In Appian 7.9, Web APIs have been introduced. These can be used for exposing records a s JSOn-encoded list.
+
+o	How to consume the RESTful web service and how to consume the JSON response?
+
+
+o	Suppose I'm trying to insert a record in the data base and there is a primary key in the table and I'm not sure about the value, so many times we can just leave the primary key field blank and try to insert an record and it will get inserted, but in this scenario it is not being inserted as in the record is not being saved to the database ,in this case what are the possible ways of debugging the issue, how should I track the root cause?
+
+
+o	What are the triggered sequences?
+
+
+o	There is already one record in the database, customer record, and I want to update the customer name, so how to do this from the process model?
+
+o	So for updating and for adding new record to the database will you be using same service "write to the database"?
+Yes, for updating and adding a new record same smart service is used. But the CDT should have a field designated as a a primary Key.
+
+
+o	Have you tried creating data stores and adding CDTs in appian? Can you please briefly describe about it.
+
+o	In case there are any changes to the tables, the I have to update the CDTs and update the data store, but the I have to check which are the process models or rules that have been impacted if I change the CDT, so is there any way to find that out?
+
+You can carry out Impact analysis from the System->Data Types tab.
+select the CDT. An option for impact analysis will be shown.
+Impact analysis will show all the process models or query rules that have been impacted.
+
+o	Do you know how to create the batch process in appian ,can I create a process model that will be run every day at certain time?
+
+There are two approaches:
+A timer event can be applied on the start event of the process model. The timer can be configured to run at periodic intervals.
+
+Other approach:
+
+Create a wrapper process model. Add the sub-process model as a node. You can shedule the subprocess node to be triggered periodically from the "Scheduling" tab.
+
+o	what is the difference between query Rule and a!queryEntity()
+
+queryEntity allows you to fetch data from appian datastore using a simple expression rule.
+We can specify which columns we need to retrive rathher than retrieving all the columns.
+Custom filters can also be specified.
+
+On the  other hand, in a query rule this cannot be done.
+Also query rule has a slower performance than queryEntity
+It is recommended to use queryEntity.
+
+
+o	So I have a query entity added in the expression rule, I’m passing the customer Id and it is giving me the customer name, but in case I pass the wrong ID, it will break my rule and it will throw an exception and when I'm calling it through the SAIL form it will throw the exception on the SAIL form, so I want to handle it gracefully, it should show some nice error message to the use so how it should be done? Should I handle this in UI or query rule?
+
+
+o	On the UI, one of my field gets updated based on the web service response so, user just inputs the customer name and it is validated from the web service and I'll show the response if the name is valid if not show the error message, so how to call the web service from UI and how to handle its response in UI itself?
+
+
+o	what is the latest version of Appian you have worked on?
+
+
+o	What was the version of Appian when you gave L1 certification?
+7.8
+
+o	What is the procedure to create a plugin and add it to Appian?
+
+o	In the process model there is the user input node, I can attach the SAIL form to it, can I attach a JSP page to it?

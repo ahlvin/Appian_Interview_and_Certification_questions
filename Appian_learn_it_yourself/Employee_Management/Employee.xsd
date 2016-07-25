@@ -1,0 +1,96 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/suite/types/" targetNamespace="http://localhost:8080/suite/types/">
+<xsd:include schemaLocation="%7Bhttp%3A%2F%2Flocalhost%3A8080%2Fsuite%2Ftypes%2F%7DAddress.xsd"/>
+
+
+  <xsd:complexType name="Employee">
+  
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+	         @Table(name="Employees")
+        </xsd:appinfo>
+      <xsd:documentation><![CDATA[All the Employees resides in this CDT structure]]></xsd:documentation>
+    </xsd:annotation>
+  
+    <xsd:sequence>
+	
+      <xsd:element name="id" type="xsd:int" nillable="true" >
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+				@Id
+				@GeneratedValue
+				 @Column(name="ID",columnDefinition="int")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+	  
+      <xsd:element name="firstName" type="xsd:string" nillable="true" >
+	  
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+			   @Column(name="FIRSTNAME",columnDefinition="varchar(500)")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+      <xsd:element name="lastName" type="xsd:string" nillable="true" >
+	  
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+				@Column(name="LASTNAME",columnDefinition="varchar(500)")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+      <xsd:element name="department" type="xsd:string" nillable="true" >
+	  
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+			  @Column(name="DEPARTMENT",columnDefinition="varchar(500)")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+      <xsd:element name="title" type="xsd:string" nillable="true" >
+	  
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+			  @Column(name="TITLE",columnDefinition="varchar(500)")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+      <xsd:element name="phoneNumber" type="xsd:string" nillable="true" >
+	  
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+			  @Column(name="PHONE_NUMBER",columnDefinition="varchar(500)")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+      <xsd:element name="startDate" type="xsd:date" nillable="true" >
+		<xsd:annotation>
+			<xsd:appinfo source="appian.jpa">
+			   @Column(name="START_DATE",columnDefinition="date")
+			</xsd:appinfo>
+		</xsd:annotation>
+	  </xsd:element>
+	  
+	  
+	  <xsd:element maxOccurs="unbounded" name="arrcdt_addresses" type="tns:Address">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+		    @OneToMany(cascade={CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH}, indexed=false)
+            @JoinColumn(name="EMPID", nullable=false)
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  
+    </xsd:sequence>
+	
+	
+  </xsd:complexType>
+  
+  
+</xsd:schema>

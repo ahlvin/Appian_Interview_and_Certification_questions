@@ -1,0 +1,64 @@
+=load(
+  local!items: {
+    {item: "Item 1", qty: 1, unitPrice: 10},
+    {item: "Item 2", qty: 2, unitPrice: 20}
+  },
+  local!selected: tointeger({}),
+  a!gridLayout(
+    label: "Grid Layout",
+    instructions: "Selected: " & local!selected,
+    selectable: true,
+    selectionValue: local!selected,
+    selectionSaveInto: local!selected,
+    headerCells: {
+      a!gridLayoutHeaderCell(label: "Item"),
+      a!gridLayoutHeaderCell(label: "Qty", align: "RIGHT"),
+      a!gridLayoutHeaderCell(label: "Unit Price", align: "RIGHT"),
+      a!gridLayoutHeaderCell(label: "Total", align: "RIGHT")
+    },
+    rows: {
+      a!gridRowLayout(id: 1, contents: {
+        a!textField(
+          value: local!items[1].item,
+          saveInto: local!items[1].item
+        ),
+        a!integerField(
+          align: "RIGHT",
+          value: local!items[1].qty,
+          saveInto: local!items[1].qty
+        ),
+        a!floatingPointField(
+          align: "RIGHT",
+          value: local!items[1].unitPrice,
+          saveInto: local!items[1].unitPrice
+        ),
+        a!textField(
+          align: "RIGHT",
+          readOnly: true,
+          value: dollar(tointeger(local!items[1].qty) * todecimal(local!items[1].unitPrice))
+        )
+      }),
+      a!gridRowLayout(id: 2, contents: {
+        a!textField(
+          value: local!items[2].item,
+          saveInto: local!items[2].item
+        ),
+        a!integerField(
+          align: "RIGHT",
+          value: local!items[2].qty,
+          saveInto: local!items[2].qty
+        ),
+        a!floatingPointField(
+          align: "RIGHT",
+          value: local!items[2].unitPrice,
+          saveInto: local!items[2].unitPrice
+        ),
+        a!textField(
+          align: "RIGHT",
+          readOnly: true,
+          value: dollar(tointeger(local!items[2].qty) * todecimal(local!items[2].unitPrice))
+        )
+      })
+    }
+  )
+)

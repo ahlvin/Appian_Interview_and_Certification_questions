@@ -1,0 +1,56 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/suite/types/" targetNamespace="http://localhost:8080/suite/types/">
+  <xsd:complexType name="MMS_Feed_Data">
+
+    <xsd:annotation>
+	    <xsd:appinfo source="appian.jpa">
+            @Table(name="MMS_Feed_Data")
+        </xsd:appinfo> 
+      <xsd:documentation>a custom data type to track all the activity posts of the Meeting Feed</xsd:documentation>
+    </xsd:annotation>
+
+
+    <xsd:sequence>
+	
+	   <xsd:element name="id" type="xsd:unsignedInt">
+            <xsd:annotation>
+                <xsd:appinfo source="appian.jpa">
+                    @Id
+                    @GeneratedValue
+					@Column(name="ID",columnDefinition="bigint")
+                </xsd:appinfo>
+            </xsd:annotation>
+       </xsd:element>
+	   
+		<xsd:element name="feed_meetingId" nillable="true" type="xsd:unsignedInt">
+			<xsd:annotation>
+				<xsd:appinfo source="appian.jpa">
+				  @Column(name="MEETING_ID",columnDefinition="bigint")
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:element> 
+		
+		<xsd:element name="feed_Id" nillable="true" type="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo source="appian.jpa">
+				  @Column(name="FEED_ID")
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:element> 
+
+
+      <xsd:element name="dtm_timeStampWhenPosted" type="xsd:dateTime" nillable="true" >
+                <xsd:annotation>
+                   <xsd:appinfo source="appian.jpa">
+                       @Column(name="TIMESTAMP_WHEN_EVENT_POSTED",columnDefinition="datetime")
+                   </xsd:appinfo>
+                </xsd:annotation>
+      </xsd:element>
+
+
+    </xsd:sequence>
+
+
+  </xsd:complexType>
+
+
+</xsd:schema>

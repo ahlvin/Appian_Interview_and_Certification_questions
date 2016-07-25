@@ -1,0 +1,59 @@
+load(
+ 
+  local!pagingInfo: a!pagingInfo(startIndex: 1, batchSize: 5),
+  
+  with(
+    
+    local!datasubset: rule!getMyTasks(local!pagingInfo),
+    
+    a!gridField(
+      
+      label: local!datasubset.report.name,
+      instructions: local!datasubset.report.description,
+      columns: {
+        a!gridTextColumn(
+          label: local!datasubset.columns[1].label,
+          field: local!datasubset.columns[1].field,
+          data: if(local!datasubset.totalCount = 0,
+             {},
+             local!datasubset.data[1].cells.value
+          ),
+          alignment: local!datasubset.columns[1].alignment,
+          links: apply(
+            a!processTaskLink(label: _, task: _),
+            merge(
+              
+              local!datasubset.data[1].cells.value,
+              local!datasubset.data[1].cells.drilldown
+            )
+          )
+        
+        ),
+        
+        a!gridTextColumn(
+          label: local!datasubset.columns[4].label,
+          field: local!datasubset.columns[4].field,
+          data: if(local!datasubset.totalCount = 0,
+             {},
+             local!datasubset.data[4].cells.value
+          ),
+          alignment: local!datasubset.columns[4].alignment
+        ),
+        
+        a!gridTextColumn(
+          label: local!datasubset.columns[5].label,
+          field: local!datasubset.columns[5].field,
+          data: if(local!datasubset.totalCount = 0,
+             {},
+             local!datasubset.data[5].cells.value
+          ),
+          alignment: local!datasubset.columns[5].alignment
+        )
+      },
+      value: local!pagingInfo,
+      saveInto: local!pagingInfo,
+      totalCount: local!datasubset.totalCount
+    )
+  )
+)
+

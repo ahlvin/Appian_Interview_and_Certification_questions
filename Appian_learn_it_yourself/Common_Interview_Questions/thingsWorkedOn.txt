@@ -1,0 +1,18 @@
+From Nov 2015 to Current
+
+1. Completed Business Data solution which was developed for FRB customer.
+2. Gave training sessions to new Appian developers.
+3. Implemented Appian Appinsights which was deployed to customer location at FRB
+4. Also worked in initial POC for Ask Appian.
+5. Completed SambaPOC in 2 days - was major contributor. This led to Persistent winning the Samba project. I frankly feel I deserved appreciation for it formally.
+6. Worked on Logistics management application for Appian world. Developed the external web application which communicated with Appian process models via Web Service.
+7. Have been helpful resource to many people in technical problems in Appian at Pune.
+8. Developed plugin utilities for AppInsights, AppInsights Live, Business Data.
+9. Implemented Web APIs for AppianInsights Live
+10. My skills include Appian and other technologies - Java, JavaScript , Node.js and C, also worked on these at different times. 
+11. Had the past record as a highest scorer in Appian certification in Appian practice.
+12. Had 300/300 in Code gladiators(a coding competition) and ranked 35th in Persistent.
+
+
+From July 2015 to Aug 2015
+1. Worked on HR Onboarding POC with whole team. Finished the solution in 4 days. I implemented the major workflow.

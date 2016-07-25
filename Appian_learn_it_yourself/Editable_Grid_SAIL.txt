@@ -1,0 +1,199 @@
+The example below demonstrates the eidtable grid.
+
+__________________________________________________________________________________________
+
+/*The basic (supporting rule ) for genearting each column of the grid*/
+
+a!gridRowLayout(
+  
+  id: ri!index,
+  contents: {
+    
+    a!dateField(
+      label: "Date",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please enter a date",
+      value: ri!items[ri!index].date,
+      saveInto: ri!items[ri!index].date
+      
+    ),
+    
+    a!dropdownField(
+      
+      label: "Hours",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please select Hours",
+      choiceLabels: {
+         1 + enumerate(12)  
+      },
+      
+      choiceValues: {
+        1 + enumerate(12)
+      },
+      
+      placeholderLabel: "HH",
+      value: ri!items[ri!index].hours,
+      saveInto: ri!items[ri!index].hours
+    ),
+    
+    a!dropdownField(
+      
+      label: "Minutes",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please select minutes",
+      choiceLabels: {
+         enumerate(61)  
+      },
+      
+      choiceValues: {
+         enumerate(61)
+      },
+      placeholderLabel: "MM",
+      value: ri!items[ri!index].minutes,
+      saveInto: ri!items[ri!index].minutes
+    ),
+    
+    a!dropdownField(
+      
+      
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please select",
+      placeholderLabel: "AM/PM",
+      choiceLabels: {
+         cons!MMS_AM_PM
+      },
+      
+      choiceValues: {
+         cons!MMS_AM_PM
+      },
+      value: ri!items[ri!index].amorpm,
+      saveInto: ri!items[ri!index].amorpm
+    ),
+    a!linkField(
+      
+      label: "Delete",
+      align: "CENTER",
+      links: a!dynamicLink(
+        label: char(10005),
+        value: ri!index,
+        saveInto: {
+                   ri!items << remove(ri!items, _),
+                   ri!itemsToken << remove(ri!itemsToken, _)
+                  }
+        
+      )
+      
+    )
+    
+
+    
+  }
+  
+)
+
+
+    
+
+
+______________________________________________________________________________
+
+/* the actual rule for displaying the edityable grid */
+
+
+load(
+  
+  local!items:rule!return_dateTime_Object_List(ri!arrdtm_dateTimes),
+  
+  local!itemsToken,
+  
+
+  a!sectionLayout(
+        
+        firstColumnContents: {
+             
+            a!gridLayout(
+              
+              label: "Add Reminders", 
+              headerCells: {
+                a!gridLayoutHeaderCell(
+                  label: "Date",
+                  align: "LEFT"
+                ),
+                a!gridLayoutHeaderCell(
+                  label: "Hours",
+                  align: "LEFT"
+                ),
+                a!gridLayoutHeaderCell(
+                  label: "Minutes",
+                  align: "LEFT"
+                ),
+                a!gridLayoutHeaderCell(
+                  label: "AM/PM",
+                  align: "LEFT"
+                ),
+                a!gridLayoutHeaderCell(
+                  
+                  align: "CENTER"
+                )
+              },
+              columnConfigs: {
+                a!gridLayoutColumnConfig(
+                  width: "DISTRIBUTE"
+                ),
+                a!gridLayoutColumnConfig(
+                  width: "DISTRIBUTE"
+                ),
+                a!gridLayoutColumnConfig(
+                  width: "DISTRIBUTE"
+                ),
+                a!gridLayoutColumnConfig(
+                  width: "DISTRIBUTE"
+                ),
+                a!gridLayoutColumnConfig(
+                  width: "NARROW"
+                )
+              },
+              rows: {
+                    a!applyComponents(
+                
+                function: rule!ucItemRowEach(
+                  index:_,
+                  items: local!items,
+                  itemToken: local!itemsToken
+                 
+                ),
+                
+                array: if(or(isnull(local!items), count(local!items) < 1), {}, 1+enumerate(count(local!items))),
+                arrayVariable: local!itemsToken
+                
+             
+              )
+              }
+            ),
+            
+            a!linkField(
+              
+              label: "Add Link",
+              labelPosition: "COLLAPSED",
+              links: a!dynamicLink(
+                
+                label: "+Add Item",
+                value: {date: "", hours: 12, minutes: 0, amorpm: "AM"},
+                saveInto: {
+                  local!items << append(local!items, _),
+                  local!itemsToken << append(local!itemsToken, _)
+                }
+              )
+            )
+
+        }
+    ) 
+
+  
+  
+
+)

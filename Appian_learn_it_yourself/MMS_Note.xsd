@@ -1,0 +1,62 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/suite/types/" targetNamespace="http://localhost:8080/suite/types/">
+  <xsd:complexType name="MMS_Note">
+
+    <xsd:annotation>
+	    <xsd:appinfo source="appian.jpa">
+            @Table(name="MMS_Notes")
+        </xsd:appinfo> 
+      <xsd:documentation>a custom data type for a user note in MMS</xsd:documentation>
+    </xsd:annotation>
+
+
+    <xsd:sequence>
+	
+	   <xsd:element name="int_note_ID" type="xsd:unsignedInt">
+            <xsd:annotation>
+                <xsd:appinfo source="appian.jpa">
+                    @Id
+                    @GeneratedValue
+					@Column(name="NOTE_ID",columnDefinition="bigint")
+                </xsd:appinfo>
+            </xsd:annotation>
+       </xsd:element>
+	   
+		<xsd:element name="note_meetingId" nillable="true" type="xsd:unsignedInt">
+			<xsd:annotation>
+				<xsd:appinfo source="appian.jpa">
+				  @Column(name="MEETING_ID",columnDefinition="bigint")
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:element> 
+
+      <xsd:element name="txt_userName" type="xsd:string" nillable="true" >
+                <xsd:annotation>
+                   <xsd:appinfo source="appian.jpa">
+                       @Column(name="USERNAME",columnDefinition="varchar(500)")
+                   </xsd:appinfo>
+                </xsd:annotation>
+      </xsd:element>
+
+      <xsd:element name="dtm_timeStampWhenNoteCreated" type="xsd:dateTime" nillable="true" >
+                <xsd:annotation>
+                   <xsd:appinfo source="appian.jpa">
+                       @Column(name="TIMESTAMP_WHEN_NOTE_CREATED",columnDefinition="datetime")
+                   </xsd:appinfo>
+                </xsd:annotation>
+      </xsd:element>
+
+      <xsd:element name="txt_note" type="xsd:string" nillable="true" >
+                <xsd:annotation>
+                   <xsd:appinfo source="appian.jpa">
+                       @Column(name="NOTE",columnDefinition="varchar(2000)")
+                   </xsd:appinfo>
+                </xsd:annotation>
+      </xsd:element>
+
+    </xsd:sequence>
+
+
+  </xsd:complexType>
+
+
+</xsd:schema>

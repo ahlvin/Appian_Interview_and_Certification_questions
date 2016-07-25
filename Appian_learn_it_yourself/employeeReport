@@ -1,0 +1,146 @@
+/*
+Inputs:
+
+data - Any Type
+categoryField: Text  eg: Department , it is displayed on x axis
+labelField - Text    eg: Title
+dataPointField-  Text  eg: id
+
+data is like:
+
+ID  TITLE(labels)                DEPARTMENT(categories)
+
+1	Director			Engineering
+1	Manager	    		Engineering
+4	Software Engineer	Engineering
+3	Analyst				Finance
+1	Director			Finance
+1	Director			HR
+1	Manager				HR
+2	Consultant			Professional Services
+1	Director			Professional Services
+1	Manager				Professional Services
+1	Manager				Sales
+3	Sales Associate		Sales
+*/
+
+//rule!generateMultipleChartSeries
+
+=load(
+
+	local!categories: index(ri!data, ri!categoryField, {}) ,
+	/*
+	Categories will contain:
+	Engineering, Finance, HR, Professional Services, Sales
+	*/
+	
+	local!labels: index(ri!data, ri!labelField, {}),
+	
+	/* Labels will contain: 
+	Director, Manager, Software Engineering, Analyst, Consultant, Sales Associate*/
+	
+	/* Loop over the list of series labels to find the data points for each series */
+	apply(
+		
+		rule!generateChartSeries(
+			data: ri!data,
+			categoryField: ri!categoryField,
+			labelField: ri!labelField,
+			dataPointField: ri!datapointField,
+			
+			categories: union( local!categories, cast(typeof(local!categories), {} ) ),
+			label: _
+		
+		),
+		
+		union(local!labels, cast(typeof(local!labels), {}))
+	)
+)
+
+
+__________________________________________________________________________________________________________
+
+//rule!generateChartSeries
+
+/*
+Inputs:
+
+data - Any Type,
+categroyField - Text,
+labelField - Text,
+dataPointField - Text,
+categories - Any Type,
+label-  Any Type
+*/
+
+a!chartSeries(	
+	label: ri!label,
+	data: apply(
+		
+		rule!findDataPoints(
+			data: ri!data,
+			categoryField: ri!categoryField,
+			labelField: ri!labelField,
+			dataPointField: ri!datapointField,
+			category: _,
+			label: ri!label
+			
+		),
+		
+		ri!categories
+	)
+)
+
+
+_____________________________________________________________________________________________________________________
+
+//  rule!findDataPoints
+
+/*
+
+Inputs: data - any type
+categoryField - Text
+labelField - Text
+dataPointField - Text
+category - Any Type
+label - Any Type
+*/
+
+with(
+	
+	local!categories: index(ri!data, ri!categoryField, {}),
+	
+	local!labels: index(ri!data, ri!labelField, {}),
+	
+	local!intersection: intersection(
+	
+		where(local!categories = cast(typeof(local!categories) , ri!category) , 0),
+		where(local!labels = cast(typeof(local!labels), ri!label), 0)
+	),
+	
+	if(length(local!intersection) = 0,  0,  index(index(ri!data, ri!datapointField, {})  , local!intersection, 0 )    )
+
+)
+
+
+__________________________________________________________________________________________________________
+
+rule!generateMultipleChartSeries(
+      data: local!datasubset.data,
+      categoryField: "department",
+      labelField: "title",
+      datapointField: "id"
+    )
+	
+	
+	
+	local!departments: union(local!datasubset.data.department, cast(typeof(local!datasubset.data.department) , {})),
+	
+	
+local!series: a!generateMultipleChartSeries(
+
+	data: local!datasubset.data,
+	categoryField: "department",
+	labelField: "title",
+	datapointField: "id"
+)

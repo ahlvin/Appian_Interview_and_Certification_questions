@@ -1,0 +1,163 @@
+load(
+  
+  local!items:rule!return_dateTime_Object_List(ri!arrdtm_dateTimes),
+  
+  local!itemToken,
+  
+
+  a!gridLayout(
+    
+    label: "Select Reminders",
+    headerCells: {
+      a!gridLayoutHeaderCell(
+        label: "Date",
+        align: "LEFT"
+      ),
+      a!gridLayoutHeaderCell(
+        label: "Hours",
+        align: "LEFT"
+      ),
+      a!gridLayoutHeaderCell(
+        label: "Minutes",
+        align: "LEFT"
+      ),
+      a!gridLayoutHeaderCell(
+        label: "AM/PM",
+        align: "LEFT"
+      )
+    },
+    columnConfigs: {
+      a!gridLayoutColumnConfig(
+        width: "DISTRIBUTE"
+      ),
+      a!gridLayoutColumnConfig(
+        width: "DISTRIBUTE"
+      ),
+      a!gridLayoutColumnConfig(
+        width: "DISTRIBUTE"
+      ),
+      a!gridLayoutColumnConfig(
+        width: "DISTRIBUTE"
+      )
+    },
+    rows: {
+          a!applyComponents(
+      
+      function: rule!ucItemRowEach(
+        index:_,
+        items: local!items,
+        itemToken: local!itemToken
+       
+      ),
+      
+      array: if(or(isnull(local!items), count(local!items) < 1), {}, 1+enumerate(count(local!items))),
+      arrayVariable: local!itemToken
+      
+   
+    )
+    }
+  )
+
+)
+
+
+
+___________________________________________________________________________________________________________________
+
+ucItemRowEach rule
+  
+
+
+a!gridRowLayout(
+  
+  id: ri!index,
+  contents: {
+    
+    a!dateField(
+      label: "Select DateTime",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please enter a date/time",
+      value: ri!items[ri!index],
+      saveInto: ri!items[ri!index]
+    )
+    
+    
+  }
+  
+)
+
+
+
+a!gridRowLayout(
+  
+  id: ri!index,
+  contents: {
+    
+    a!dateField(
+      label: "Date",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please enter a date",
+      value: ri!items[ri!index],
+      saveInto: ri!items[ri!index]
+    ),
+    
+    a!dropdownField(
+      
+      label: "Hours",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please select Hours",
+      choiceLabels: {
+         1 + enumerate(12)  
+      },
+      
+      choiceValues: {
+        1 + enumerate(12)
+      },
+      
+      placeholderLabel: "HH"
+    ),
+    
+    a!dropdownField(
+      
+      label: "Minutes",
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please select minutes",
+      choiceLabels: {
+         enumerate(61)  
+      },
+      
+      choiceValues: {
+         enumerate(61)
+      },
+      placeholderLabel: "MM"
+    ),
+    
+    a!dropdownField(
+      
+      
+      labelPosition: "ADJACENT",
+      required: true,
+      requiredMessage: "Please select",
+      placeholderLabel: "AM/PM",
+      choiceLabels: {
+         cons!MMS_AM_PM
+      },
+      
+      choiceValues: {
+         cons!MMS_AM_PM
+      }
+    )
+    
+    
+  }
+  
+)
+
+
+
+=todate(ri!dtm_dateTime) &  " HH: " & 
+if(hour(ri!dtm_dateTime) >= 13, (mod(hour(ri!dtm_dateTime) , 12) ),  hour(ri!dtm_dateTime)  & " MM: " & minute(ri!dtm_dateTime))

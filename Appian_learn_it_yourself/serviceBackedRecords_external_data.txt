@@ -1,0 +1,35 @@
+http://www.thomas-bayer.com/sqlrest/CUSTOMER/
+
+to get the first customer:   http://www.thomas-bayer.com/sqlrest/CUSTOMER/1
+
+
+=xpathsnippet(
+"http://www.thomas-bayer.com/sqlrest/CUSTOMER/4", "/CUSTOMER/"
+)
+
+xpathsnippet("http://www.thomas-bayer.com/sqlrest/CUSTOMER/", "CUSTOMERList//CUSTOMER/@xlink:href" )
+
+=with(
+
+  local!filterValue: if( isnull(ri!query.'logicalExpression|filter|search'), "", ri!query.'logicalExpression|filter|search'.value ),
+  
+
+  local!services: rule!getAllCustomerXMLLinks(cons!TXT_URL_CUSTOMER_XML_SERVICE),
+
+  a!dataSubset(
+    startIndex: 1,
+    batchSize: count(local!services),
+    totalCount: count(local!services),
+    data: apply(rule!CustomerServicesCreator , local!services),
+    identifiers: apply(rule!CustomerServicesExtractID, local!services )
+  )
+  
+)
+
+apply(rule!CustomerServicesCreator , local!services),
+
+apply(rule!CustomerServicesExtractID, rule!getAllCustomerXMLLinks(cons!TXT_URL_CUSTOMER_XML_SERVICE))
+
+
+apply(rule!CustomerServicesCreator , rule!getAllCustomerXMLLinks(cons!TXT_URL_CUSTOMER_XML_SERVICE))
+

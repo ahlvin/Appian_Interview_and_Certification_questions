@@ -1,0 +1,39 @@
+load(
+  
+  local!pagingInfo: a!pagingInfo(
+    startIndex: 1,
+    batchSize: 20,
+    sort: a!sortInfo(
+      field: "int_durationInMinutes",
+      ascending: false
+    )
+  ),
+  
+  local!datasubset:  queryrecord(
+    cons!MMS_RECORD_TYPE,
+    
+    a!query(
+      selection: a!querySelection(
+        columns: {
+          a!queryColumn(field: "int_durationInMinutes")
+        }
+      ),
+      pagingInfo: local!pagingInfo
+    )
+  ),
+  
+  a!gridField(
+    totalCount: local!datasubset.totalCount,
+    columns: {
+      a!gridTextColumn(
+        label: "Minues",
+        field: "int_durationInMinutes",
+        data: index(local!datasubset.data, "int_durationInMinutes", null)
+      )
+    },
+    value: local!pagingInfo,
+    saveInto: local!pagingInfo
+  )
+   
+)
+

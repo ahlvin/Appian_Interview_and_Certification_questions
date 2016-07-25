@@ -1,0 +1,66 @@
+= webservicequery(
+  
+  a!wsConfig(
+    wsdlUrl: "http://bhd10060:8080/suite/webservice/processmodel/Names_webservice?WSDL",
+    service: "{http://appiancorp.com/webservices/pm}Names_webservice",
+    port: "StartProcessIFPort",
+    operation: "{http://appiancorp.com/webservices/pm}start",
+    wsdlCredentials: a!wsHttpCredentials(username: "chetan.yewale", password: "acer4720"),
+    extensions: {
+       a!wsUsernameToken(username: "chetan.yewale", password: "acer4720")  
+       
+    }
+    
+  ),
+  {
+    username: {
+      "chetan.yewale"
+    },
+    password: {
+      "acer4720"
+    },
+    arrtxt_names: {}
+  }
+).returnValue
+
+
+
+__________________________________________________________________
+
+= webservicequery(
+  
+  a!wsConfig(
+    wsdlUrl: "http://bhd10060:8080/suite/webservice/processmodel/Names_webservice?WSDL",
+    service: "{http://appiancorp.com/webservices/pm}Names_webservice",
+    port: "StartProcessIFPort",
+    operation: "{http://appiancorp.com/webservices/pm}start",
+    wsdlCredentials: a!wsHttpCredentials(username: "chetan.yewale", password: "acer4720"),
+    extensions: {
+       a!wsUsernameToken(username: "chetan.yewale", password: "acer4720")  
+       
+    }
+    
+  ),
+  {
+    username: {
+      "chetan.yewale"
+    },
+    password: {
+      "acer4720"
+    },
+    arrtxt_names: {}
+  }
+).returnValue
+
+_______________________________________________________________
+= webservicequery(
+  a!wsConfig(
+    wsdlUrl: "http://localhost:8080/axis2/services/CorporateDirectoryService?wsdl",
+    service: "{http://bindrecipe.services.ws.appiancorp.com}CorporateDirectoryService",
+    port: "CorporateDirectoryServiceHttpSoap12Endpoint",
+    operation: "{http://bindrecipe.services.ws.appiancorp.com}getEmployees"
+  ),
+  {
+    getEmployeesRequest: {}
+  }
+).returnValue.getEmployeesResponse.return
